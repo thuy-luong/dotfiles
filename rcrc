@@ -1,2 +1,2 @@
 DOTFILES_DIRS=$HOME/.dotfiles
-EXCLUDES="README.md Brewfile Brewfile.lock.json"
+EXCLUDES="README.md Brewfile Brewfile.lock.json .DS_Store"

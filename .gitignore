@@ -1,1 +1,8 @@
 Brewfile.lock.json
+.DS_Store
+# never commit secrets or machine state
+.ssh/
+.gnupg/
+*.pem
+*_history
+.env*

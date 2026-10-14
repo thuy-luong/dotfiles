@@ -1,0 +1,177 @@
+# Place a copy of this config to ~/.config/aerospace/aerospace.toml
+# After that, you can edit ~/.aerospace.toml to your liking
+
+# You can use it to add commands that run after AeroSpace startup.
+# Available commands : https://nikitabobko.github.io/AeroSpace/commands
+after-startup-command = []
+
+# Start AeroSpace at login
+start-at-login = true # I've set this to true for you
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+accordion-padding = 0
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+
+[key-mapping]
+    preset = 'qwerty'
+
+[gaps]
+    inner.horizontal = 0
+    inner.vertical =   0
+    outer.left =       0
+    outer.bottom =     0
+    outer.top =        0
+    outer.right =      0
+
+# 'main' binding mode declaration
+[mode.main.binding]
+    # ---
+    # 1. YOUR LAYOUT REQUESTS
+    # ---
+
+    # NOTE: AeroSpace doesn't have a 'three-column' layout built-in.
+    # The available layouts are 'tiles', 'accordion', 'horizontal', and 'vertical'.
+    # 'horizontal' is the 50/50 split you wanted.
+    # 'accordion' is the "fullscreen" mode (shows one window at a time).
+
+    # YOUR REQUEST: Cycle layouts
+    # This key (alt + /) cycles between 'tiles' (50/50) and 'accordion' (fullscreen)
+    alt-slash = 'layout tiles accordion'
+
+# YOUR REQUEST: Activate specific layouts
+    # These commands now force a switch to tiling mode *first*,
+    # so they work even if you are in 'floating' mode.
+    'alt-cmd-h' = ['layout tiling', 'layout tiles']     # Activate 'tiles' (50/50 split)
+    'alt-cmd-f' = ['layout tiling', 'layout accordion'] # Activate 'accordion' (fullscreen)
+    # Hotkey to make the focused container split horizontally (create a stack)
+    'alt-cmd-s' = 'layout h_tiles'
+
+    # Optional: A key to return to the default "smart" split
+    'alt-cmd-d' = 'layout tiles'
+
+    # Equalize all window sizes
+    'alt-cmd-e' = 'balance-sizes'
+
+    # ---
+    # 2. YOUR RESIZE REQUESTS
+    # ---
+
+    # NOTE: Resize doesn't use percentages. It uses pixel/point values. I'm having trouble where when I initially open AeroSpace, it does the 50-50 split, but then when I do the Option-Command-L,
+    # I've set them to 20.
+    'alt-ctrl-h' = 'resize width -20'
+    'alt-ctrl-l' = 'resize width +20'
+    'alt-ctrl-k' = 'resize height -20'
+    'alt-ctrl-j' = 'resize height +20'
+
+    # ---
+    # 3. YOUR FLOATING TOGGLE
+    # ---
+    'alt-shift-space' = 'layout floating tiling' # Toggle entire workspace float
+
+    # ---
+    # DEFAULT KEYBINDINGS (from your file)
+    # ---
+    alt-comma = 'layout accordion horizontal vertical'
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
+    alt-tab = 'workspace-back-and-forth'
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    alt-shift-semicolon = 'mode service'
+
+# 'service' binding mode declaration.
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main'] # reset layout
+    f = ['layout floating tiling', 'mode main'] # Toggle focused window float
+    backspace = ['close-all-windows-but-current', 'mode main']
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
+    down = 'volume down'
+    up = 'volume up'
+    shift-down = ['volume set 0', 'mode main']
+
+# ---
+# 4. YOUR FLOATING APP RULES
+# ---
+
+# NOTE: The syntax is not [floating-windows.rules], it's [[on-window-detected]]
+# This is the new, correct syntax from the docs.
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.SystemSettings'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'dev.warp.Warp-Stable'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.toggl.daneel'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.fournova.Tower3'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.localsend.localsendApp'
+run = 'layout floating'

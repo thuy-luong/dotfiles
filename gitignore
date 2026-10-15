@@ -15,3 +15,11 @@ tags
 !tags/
 
 ffg.config.jsonc
+ffg.config.json
+.specstory
+.cursorindexingignore
+tsconfig.tsbuildinfo
+
+**/.claude/settings.local.json
+
+docs/superpowers

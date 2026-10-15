@@ -8,13 +8,14 @@
 	br = branch
 	hist  = log -F --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 [user]
-	name = Kasif Gilbert
-	email = kasif.gilbert@gmail.com
+	name = Thuy Luong
+	email = thuy419@gmail.com
 [core]
   editor = /usr/bin/vim
 	excludesfile = ~/.gitignore
 [merge]
   ff = only
+	tool = Kaleidoscope
 [push]
   default = matching
 [color]
@@ -26,3 +27,15 @@
 	required = true
 [init]
 	defaultBranch = main
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false

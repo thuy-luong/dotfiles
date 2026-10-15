@@ -16,6 +16,8 @@ set tabstop=2                     " A tab is two spaces
 set shiftwidth=2                  " An autoindent (with <<) is two spaces
 set expandtab                     " Use spaces, not tabs
 set backspace=indent,eol,start    " Backspace through everything in insert mode
+set re=0
+set redrawtime=10000
 
 " Make :W the same as :w, which It isn't bound to anything
 command! W :w
